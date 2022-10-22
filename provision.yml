@@ -1,6 +1,0 @@
----
-- hosts: all
-  gather_facts: true
-  
-  roles:
-    - apache_deploy_website

@@ -1,0 +1,43 @@
+---
+- name: "Start webapp deployment"
+  debug:
+    msg: "{{ webapp_name }} deployment on {{ ansible_hostname }}"
+  when: webapp_name is defined
+ 
+- name: "Ensure document root directory exists"
+  file:
+    path: "/var/www/{{ webapp_name }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+  when: webapp_name is defined
+  become: true
+    
+- name: "Deploy webapp files"
+  template:
+    src: "{{ item }}"
+    dest: "/var/www/{{ webapp_name }}/{{ item | basename | regex_replace('\\.j2$', '') }}"
+    mode: '0755'
+  with_fileglob:
+    - "../files/*.j2"
+  become: true
+
+- name: "Ensure apache2 is presnt" 
+  service:
+    name: apache2
+  register: svc_apache
+  become: true
+
+- name: "Ensure apache2 is presnt" 
+  service:
+    name: apache2
+    state: restarted
+  when: svc_apache.exists == true
+  become: true
+
+- name: "End Install"
+  debug:
+    msg: "{{ webapp_name }} site is sucessfully deployed"
+  when: svc_apache.name == apache2
+

@@ -1,0 +1,65 @@
+---
+- name: "Start Apache installation"
+  debug:
+    msg: "Install Apache web service on {{ ansible_hostname }}"
+  
+- name: "Install apache packages"
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  become: true
+  loop:
+    - apache2
+    - httpd
+
+- name: "UFW firewall allow HTTP on port {{ http_port }}"
+  ufw:
+    rule: allow
+    port: "{{ http_port }}"
+    proto: tcp
+  become: true
+
+- name: "Deploy apache2 configration"
+  template:
+    src: "apache2.conf.j2"
+    dest: "/etc/apache2/apache2.conf"
+    mode: "0644"
+  become: true
+
+- name: "Deploy webapp page configration"
+  template:
+    src: "webapp.conf.j2"
+    dest: "/etc/apache2/{{ webapp_name }}.conf"
+    mode: '0644'
+  when: webapp_name is defined
+  become: true
+  
+- name: "Create symbolic link configration"
+  file:
+    src: "/etc/apache2/{{ webapp_name }}.conf"
+    dest: "/etc/apache2/sites-available/{{ webapp_name }}.conf"
+    state: link
+  when: webapp_name is defined
+  become: true
+
+- name: "Enable {{ webapp_name }} site"
+  command: a2ensite {{ webapp_name }}
+  become: true
+ 
+- name: "Ensure apache2 is presnt" 
+  service:
+    name: apache2
+  register: svc_apache
+  become: true
+
+- name: "Ensure apache2 is presnt" 
+  service:
+    name: apache2
+    state: restarted
+  when: svc_apache.exists == true
+  become: true
+
+- debug:
+    msg: "Apache service is installed successfully"
+  when: svc_apache.name == "apache2"
+

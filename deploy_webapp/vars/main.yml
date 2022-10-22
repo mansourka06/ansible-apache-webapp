@@ -1,0 +1,10 @@
+---
+# vars file for apache
+
+domain: localhost   # => mansourka.com
+http_port: 80
+host_url: "{{ domain }}"
+webapp_name: "mk_website"
+apache_user: mansour
+
+playbook_host: localhost

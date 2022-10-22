@@ -1,0 +1,6 @@
+---
+- hosts: "{{ playbook_host }}"
+  gather_facts: true
+  
+  roles:
+    - deploy_webapp

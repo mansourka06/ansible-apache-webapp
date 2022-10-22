@@ -1,0 +1,12 @@
+---
+# ../deploy_webapp/tasks/main.yml
+
+- name: "Installation du service web Apache"
+  include_tasks: "apache_install/apache_install_{{ ansible_os_family|lower }}.yml"
+  tags:
+    - apache_install
+    
+- name: "Deploy webapp files"
+  include_tasks: "deploy_webapp/deploy_webapp_{{ ansible_os_family|lower }}.yml"
+  tags:
+    - deploy_webapp
