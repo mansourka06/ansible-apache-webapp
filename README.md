@@ -1,38 +1,34 @@
-# ansible-webapp
+# ansible-apache-webapp
 
-## Description
-This repository automate configuration and deployment of a Apache Web Server using Ansible.
-
+This repository is setup to automate the configuration and deployment of a Apache Web Application using Ansible.
 
 ## Os available
-[x] Debian
-[ ] RedHat
-[ ] Windows server 2012
-[ ] Windows server 2016
-
-## Dependences
-* Apache
+- [x] Debian
+- [ ] RedHat
+- [ ] Windows server 2012
+- [ ] Windows server 2016
 
 ## Variables
-The default variables are [here ...](vars/main.yml)
+- The default variables are [here ...](vars/main.yml)
 
 ## Usage
- * 1 - Clone the repository : 
-    * git clone 
- 
- * 2 - From your working dir, move to the directory ansible-webapp/deploy_webapp : 
-    * cd ansible-webapp/deploy_webapp  
- 
- * Copy for webapp files to the directory deploy_webapp/files/
+- 1. Clone the repository : 
+   ```
+   git clone https://github.com/mansourka06/ansible-apache-webapp.git
+   cd ansible-apache-webapp
+   ```
+- 2. Adapt and update your apache configuration files to **templates** directory.
 
- * Copy for apache configuration files to the directory deploy_webapp/templates/
+- 3. Adapt and Update variables in [vars/main.yml](ansible-apache-web_server/vars/main.yml) with your webapp vars.
 
- * Update the files variables (vars/main.yml) with your webapp vars.
+- 4. Add your inventory hostname in **inventory.ini** file
 
- * Add your inventory hostname in the file inventory.ini
+- 5. Run the playbook with the follwing ansible adoc command:
+   `playbook.yml -i your-inventory-file  your-playbook-name.yml`
+  **Exemple:**  ``ansible-playbook -i inventory.ini playbook.yml`
 
- * Run the playbook with the follwing command (from CLI):
-    * - ansible-playbook playbook.yml -i inventory.ini
+## Contributing
+Contributions are welcome! If you find any issues or want to improve this project, please open an issue or submit a pull request.
 
 ## Author
- Mansour KA
+[Mansour KA](https://github.com/mansourka06)
