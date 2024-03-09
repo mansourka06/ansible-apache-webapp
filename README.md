@@ -32,14 +32,14 @@ Before you begin, ensure you have the following prerequisites:
 To get started with deploying the Apache web application, follow these steps:
 
 1. Clone this repository to your local machine:
-   ```
-   git clone https://github.com/mansourka06/ansible-apache-webapp.git
-   cd ansible-apache-webapp
-   ```
+```
+git clone https://github.com/mansourka06/ansible-apache-webapp.git
+```
 2. Navigate to the cloned repository directory:
-   ```
-  cd ansible-apache-webapp
-   ``` 
+
+```
+cd ansible-apache-webapp
+``` 
    
 3. Edit and update your apache configuration files to **templates** directory.
 
@@ -68,13 +68,13 @@ To test the Ansible playbook and roles using Vagrant, follow these steps:
 
 3. Use Vagrant to spin up the testing environment:
 
-    ```bash
+    ```
     vagrant up
     ```
 
 4. Once the VM is provisioned, SSH into the VM:
 
-    ```bash
+    ```
     vagrant ssh
     ```
 
@@ -90,8 +90,9 @@ To test the Ansible playbook and roles using Vagrant, follow these steps:
 
 To tear down the Vagrant testing environment, run the following command:
 
-```bash
+```
 vagrant destroy
+```
 
 ## Contributing
 Contributions are welcome! If you find any issues or want to improve this project, please open an issue or submit a pull request.
