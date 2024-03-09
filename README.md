@@ -11,19 +11,20 @@ This repository is setup to automate the configuration and deployment of a Apach
 ## Variables
 - The default variables are [here ...](vars/main.yml)
 
-## Usage
+## Getting Start
 1. **Clone the repository**: 
    ```
    git clone https://github.com/mansourka06/ansible-apache-webapp.git
    cd ansible-apache-webapp
    ```
-2. **Adapt and update your apache configuration files to **templates** directory**.
+2. Adapt and update your apache configuration files to **templates** directory.
 
-3. **Adapt and Update variables in [vars/main.yml](ansible-apache-web_server/vars/main.yml) with your webapp vars.**
+3. Adapt and Update variables in [vars/main.yml](ansible-apache-web_server/vars/main.yml) with your webapp vars.
 
-4. **Add your inventory hostname in **inventory.ini** file**
+4. Add your inventory hostname in **inventory.ini** file
 
-5. **Run the playbook with the follwing ansible adoc command:**
+5. Run the playbook with the follwing ansible adoc command:
+   
 - `playbook.yml -i your-inventory-file  your-playbook-name.yml`
 - **Exemple:**  `ansible-playbook -i inventory.ini playbook.yml`
 
