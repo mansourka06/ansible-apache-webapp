@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - deploy_webapp
+    - apache-webapp
