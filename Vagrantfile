@@ -1,8 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "geerlingguy/debian10"
+  config.vm.box = "ubuntu/bionic64"
   config.vm.hostname = "webserver"
-  # config.vm.network :private_network, ip: "192.168.56.20"
+  config.vm.network "forwarded_port", guest: 80, host: 8080
 
   config.vm.provider :virtualbox do |v|
     v.memory = 1024
@@ -11,8 +13,8 @@ Vagrant.configure("2") do |config|
   end
 
   # Ansible provisioning.
-  config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "provision.yml"
-    # ansible.install_mode = "pip"
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+    ansible.inventory_path = "inventory"
   end
 end
