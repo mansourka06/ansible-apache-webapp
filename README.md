@@ -14,9 +14,7 @@ Automating the setup of Apache web applications is essential for ensuring consis
   
 ## Os available
 - [x] Debian
-- [ ] RedHat
-- [ ] Windows server 2012
-- [ ] Windows server 2016
+- [x] RedHat
 
 ## Prerequisites
 
