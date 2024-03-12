@@ -42,7 +42,7 @@ cd ansible-apache-webapp
    
 3. Edit and update your apache configuration files to **templates** directory.
 
-4. Review and customize the `vars.yml` file in the `vars` directory to configure the web application settings according to your requirements.
+4. Review and customize the `[vars file](roles/apache-webapp/vars/main.yml)` in the `vars` directory to configure the web application settings according to your requirements.
 
 5. Edit the `inventory` file to specify the target hosts where you want to deploy the web application.
 
