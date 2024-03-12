@@ -1,14 +1,7 @@
 ---
 # handlers file for apache
 
-- name: restart apache
+- name: restart-apache
   service:
-    name: httpd
+    name: apache2
     state: restarted
-  become: true
-
-- name: restart httpd
-  service:
-    name: httpd
-    state: restarted
-  become: true

@@ -1,12 +1,50 @@
 ---
-# ../deploy_webapp/tasks/main.yml
+# tasks for apache-webapp role
 
-- name: "Installation du service web Apache"
-  include_tasks: "apache_install/apache_install_{{ ansible_os_family|lower }}.yml"
-  tags:
-    - apache_install
-    
-- name: "Deploy webapp files"
-  include_tasks: "deploy_webapp/deploy_webapp_{{ ansible_os_family|lower }}.yml"
-  tags:
-    - deploy_webapp
+- name: "Start Apache Web Sever Install and configuration"
+  debug:
+    msg: "Launch {{ webapp_name }} Apache Web Sever Install and configuration {{ ansible_hostname }}"
+  
+- name: "Install Apache web server package"
+  package:
+    name: apache2
+    update_cache: yes
+    state: latest
+
+- name: "Create document root for domain configured in host variable"
+  file:
+    path: "/var/www/{{ http_host }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: "Copy webapp files to server"
+  template:
+    src: "{{ item }}"
+    dest: "/var/www/{{ http_host }}/{{ item | basename }}" 
+    mode: '0755'
+  with_fileglob:
+    - "../files/*"
+
+- name: "Set up VirtualHost"
+  template:
+    src: "apache2.conf.j2"
+    dest: "/etc/apache2/sites-available/apache2.conf"
+
+- name: "UFW firewall allow HTTP on port {{ http_port }}"
+  ufw:
+    rule: allow
+    port: "{{ http_port }}"
+    protocol: tcp
+
+- name: "Enable {{ webapp_name }} site"
+  command: a2ensite {{ webapp_name }}
+  register: enable_site
+  notify: restart-apache
+
+- debug:
+    msg: "{{ webapp_name }} is deployed successfully"
+  when: enable_site.rc == "0"
+
+...
