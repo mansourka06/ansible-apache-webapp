@@ -13,6 +13,7 @@ Automating the setup of Apache web applications is essential for ensuring consis
 - Includes Vagrant configuration for testing the Ansible playbook and roles in a virtual environment.
   
 ## Os available
+
 - [x] Debian
 - [x] RedHat
 
