@@ -21,10 +21,10 @@ Automating the setup of Apache web applications is essential for ensuring consis
 
 Before you begin, ensure you have the following prerequisites:
 
-- Vagrant installed on your local machine.
-- VirtualBox or another supported provider configured for Vagrant.
 - Ansible installed on your local machine.
 - Basic understanding of Ansible playbooks and roles.
+- Vagrant installed on your local machine.
+- VirtualBox or another supported provider configured for Vagrant.
 
 ## Getting Started
 
