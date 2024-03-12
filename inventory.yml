@@ -1,0 +1,11 @@
+---
+
+all:
+  children:
+    web_servers:
+      hosts:
+        server1:
+          ansible_host: localhost
+          ansible_connection: local
+        web_server2:
+          ansible_host: 192.168.10.56
