@@ -1,8 +1,16 @@
 <VirtualHost *:{{ http_port }}>
-   ServerAdmin webmaster@localhost
    ServerName {{ http_host }}
    ServerAlias www.{{ http_host }}
+   ServerAdmin webmaster@localhost
    DocumentRoot /var/www/{{ http_host }}
+
+   <Directory /var/www/{{ http_host }}/>
+       AllowOverride All
+       Require all granted
+       Options Indexes FollowSymLinks Includes ExecCGI
+   </Directory>
+   DirectoryIndex index.html index.php
+   
    ErrorLog ${APACHE_LOG_DIR}/error.log
    CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
