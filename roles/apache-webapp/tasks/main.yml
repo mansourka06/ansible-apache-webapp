@@ -1,5 +1,5 @@
 ---
-# tasks for apache-webapp role
+# Ansible tasks for apache-webapp role
 
 - name: "Start Apache Web Sever Install and configuration"
   debug:
@@ -38,8 +38,8 @@
     port: "{{ http_port }}"
     protocol: tcp
 
-- name: "Enable {{ webapp_name }} site"
-  command: a2ensite {{ webapp_name }}
+- name: "Enable {{ http_host }} site"
+  command: a2ensite {{ http_host }}
   register: enable_site
   notify: restart-apache
 
