@@ -2,5 +2,5 @@
 # vars file for apache
 
 http_port: 80
-http_host: "mansourka.com"
+http_host: localhost
 webapp_name: "My Apache Web Application"
