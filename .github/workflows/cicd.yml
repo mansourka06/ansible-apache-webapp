@@ -1,0 +1,14 @@
+---
+name: Pipeline running Ansible Playbooks with GitHub Actions
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-playbooks:
+    runs-on: ubuntu-latest  #self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Ansible Playbook
+        run: ansible-playbook -i localhost playbook.yml
