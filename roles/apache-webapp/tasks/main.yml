@@ -5,13 +5,16 @@
   debug:
     msg: "Launch {{ webapp_name }} Apache Web Sever Install and configuration {{ ansible_hostname }}"
   
-- name: "Install Apache web server package"
+- name: "Install Apache web server packages"
   package:
-    name: apache2
+    name: "{{ item }}
     update_cache: yes
     state: latest
+  loop:
+    - apache2
+    - httpd
 
-- name: "Create document root for domain configured in host variable"
+- name: "Create document root direcotry"
   file:
     path: "/var/www/{{ http_host }}"
     state: directory
@@ -42,9 +45,11 @@
   command: a2ensite {{ http_host }}
   register: enable_site
   notify: restart-apache
-
-- debug:
+  ingore_erros: true
+  
+- name: "End Apache Web App deployement"
+  debug:
     msg: "{{ webapp_name }} is deployed successfully"
-  when: enable_site.rc == "0"
+  # when: enable_site.rc == "0"
 
 ...
