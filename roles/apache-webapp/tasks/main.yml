@@ -45,7 +45,7 @@
   command: a2ensite {{ http_host }}
   register: enable_site
   notify: restart-apache
-  ingore_errors: yes
+  ignore_errors: yes
   
 - name: "End Apache Web App deployement"
   debug:
