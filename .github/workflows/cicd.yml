@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Ansible Playbook
-        run: ansible-playbook -i localhost playbook.yml
+        run: ansible-playbook -i inventory.yml playbook.yml
