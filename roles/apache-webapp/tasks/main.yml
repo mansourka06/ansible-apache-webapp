@@ -7,7 +7,7 @@
   
 - name: "Install Apache web server packages"
   package:
-    name: "{{ item }}
+    name: "{{ item }}"    
     update_cache: yes
     state: latest
   loop:
