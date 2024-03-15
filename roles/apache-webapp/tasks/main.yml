@@ -7,12 +7,9 @@
   
 - name: "Install Apache web server packages"
   package:
-    name: "{{ item }}"    
+    name: apache2    
     update_cache: yes
     state: latest
-  loop:
-    - apache2
-    - httpd
 
 - name: "Create document root direcotry"
   file:
