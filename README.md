@@ -94,10 +94,11 @@ To tear down the Vagrant testing environment, run the following command:
 ```
 vagrant destroy
 ```
+
 ### Using Github Action CICD
 
-**### Setting up github and github actions**
-- Let’s add a Github Actions workflow in our project directory. Create a directory named .github and inside that directory create another directory named workflows. All our workflow files will be stored inside this directory. Create a file named [cicd.yml](.github/workflows/cicd.yml) which will make the complete path as`.github/workflows/cicd.yml`, inside we add the [code pipeline](.github/workflows/cicd.yml).
+**Setting up github and github actions**
+- Let’s add a Github Actions workflow in our project directory. Create a directory named .github and inside that directory create another directory named workflows. All our workflow files will be stored inside this directory. Create a file named [cicd.yml](.github/workflows/cicd.yml) which will make the complete path as`.github/workflows/cicd.yml`, inside we add the [code pipeline](.github/workflows/cicd.yml). This GitHub action allows you to run Ansible Playbook.
 
 - Now, whenever I push to deploy branch, a new build will be triggered which will build and push the image to docker hub. The workflow is pretty simple and you may also extend it with running tests or performing other actions as per your requirements.
 
