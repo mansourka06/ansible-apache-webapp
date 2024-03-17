@@ -1,9 +1,10 @@
 ---
 # Ansible tasks for apache-webapp role
 
-- name: "Start Apache Web Sever Install and configuration"
+- name: "Start Apache WebApp Install and configuration"
   debug:
-    msg: "Launch {{ webapp_name }} Apache Web Sever Install and configuration {{ ansible_hostname }}"
+    msg: "Launch {{ webapp_name }} install and configuration on {{ ansible_hostname }}"
+  when: webapp_name is defined
   
 - name: "Install Apache web server packages"
   package:
@@ -58,10 +59,13 @@
 
 - debug:
     msg: "{{ apache_service_status }}"
-    
+
 - name: "End Apache Web App deployement"
   debug:
     msg: "{{ webapp_name }} is deployed successfully"
-  when: (enable_site.rc == 0) and (apache_service_status.state == "running")
+  when: 
+    - webapp_name is defined
+    - enable_site.rc == 0 
+  #- apache_service_status.state == "running"
 
 ...
