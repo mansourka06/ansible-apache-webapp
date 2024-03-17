@@ -56,9 +56,12 @@
     name: apache2
   register: apache_service_status
 
+- debug:
+    msg: "{{ apache_service_status }}"
+    
 - name: "End Apache Web App deployement"
   debug:
     msg: "{{ webapp_name }} is deployed successfully"
-  when: (enable_site.rc == "0") and (apache_service_status.state == "running")
+  when: (enable_site.rc == 0) and (apache_service_status.state == "running")
 
 ...
