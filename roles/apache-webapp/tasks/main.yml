@@ -25,12 +25,13 @@
     dest: "/var/www/{{ http_host }}/{{ item | basename }}" 
     mode: '0755'
   with_fileglob:
-    - "../files/*"
+    - "../files/app/*"
 
-- name: "Set up VirtualHost"
+- name: "Configure Apache virtual host"
   template:
-    src: "apache2.conf.j2"
-    dest: "/etc/apache2/sites-available/apache2.conf"
+    src: templates/vhost.conf.j2
+    dest: /etc/apache2/sites-available/webapp.conf
+  notify: Restart Apache
 
 - name: "UFW firewall allow HTTP on port {{ http_port }}"
   ufw:
@@ -38,15 +39,20 @@
     port: "{{ http_port }}"
     protocol: tcp
 
-- name: "Enable {{ http_host }} site"
-  command: a2ensite {{ http_host }}
-  register: enable_site
-  notify: restart-apache
-  ignore_errors: yes
+- name: "Enable Apache virtual host"
+  apache2_module:
+    state: present
+    name: vhost_alias
+
+- name: "Enable site"
+  command: a2ensite webapp.conf
+  args:
+    creates: /etc/apache2/sites-enabled/webapp.conf
+  notify: Restart Apache
   
 - name: "End Apache Web App deployement"
   debug:
     msg: "{{ webapp_name }} is deployed successfully"
-  # when: enable_site.rc == "0"
+  when: enable_site.rc == "0"
 
 ...

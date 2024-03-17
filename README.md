@@ -55,6 +55,8 @@ cd ansible-apache-webapp
 
 ## Testing
 
+### Using Vagrant
+
 To test the Ansible playbook and roles using Vagrant, follow these steps:
 
 1. Ensure Vagrant is installed on your local machine.
@@ -92,6 +94,14 @@ To tear down the Vagrant testing environment, run the following command:
 ```
 vagrant destroy
 ```
+### Using Github Action CICD
+
+**### Setting up github and github actions**
+- Let’s add a Github Actions workflow in our project directory. Create a directory named .github and inside that directory create another directory named workflows. All our workflow files will be stored inside this directory. Create a file named [cicd.yml](.github/workflows/cicd.yml) which will make the complete path as`.github/workflows/cicd.yml`, inside we add the [code pipeline](.github/workflows/cicd.yml).
+
+- Now, whenever I push to deploy branch, a new build will be triggered which will build and push the image to docker hub. The workflow is pretty simple and you may also extend it with running tests or performing other actions as per your requirements.
+
+- Our workflow is now ready. Let’s test it by pushing something to the deploy branch. If you are using some other branch, push to the associated branch accordingly.
 
 ## Contributing
 Contributions are welcome! If you find any issues or want to improve this project, please open an issue or submit a pull request.
