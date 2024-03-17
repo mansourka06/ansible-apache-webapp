@@ -48,11 +48,17 @@
   command: a2ensite webapp.conf
   args:
     creates: /etc/apache2/sites-enabled/webapp.conf
+  register: enable_site
   notify: Restart Apache
   
+- name: Ensure Apache server is running
+  service:
+    name: apache2
+  register: apache_service_status
+
 - name: "End Apache Web App deployement"
   debug:
     msg: "{{ webapp_name }} is deployed successfully"
-  when: enable_site.rc == "0"
+  when: (enable_site.rc == "0") and (apache_service_status.state == "running")
 
 ...
