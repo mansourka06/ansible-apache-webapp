@@ -1,5 +1,6 @@
 ---
-- hosts: web_servers
+- name: Deploy web application
+  hosts: web_servers
   become: yes
   vars_files:
     - vars/main.yml
